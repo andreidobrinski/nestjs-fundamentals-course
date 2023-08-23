@@ -11,3 +11,9 @@ Content-Type: application/json
 {
   "name": "latte"
 }
+
+### patch coffee by id
+PATCH http://localhost:3000/coffees/123
+
+### delete coffee by id
+DELETE http://localhost:3000/coffees/123
