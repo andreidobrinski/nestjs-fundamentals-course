@@ -5,7 +5,7 @@ GET http://localhost:3000/coffees
 GET http://localhost:3000/coffees?limit=20&offset=10
 
 ### get coffee by id
-GET http://localhost:3000/coffees/123
+GET http://localhost:3000/coffees/1
 
 ### post coffee
 POST http://localhost:3000/coffees
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### patch coffee by id
-PATCH http://localhost:3000/coffees/123
+PATCH http://localhost:3000/coffees/1
 
 ### delete coffee by id
-DELETE http://localhost:3000/coffees/123
+DELETE http://localhost:3000/coffees/1
