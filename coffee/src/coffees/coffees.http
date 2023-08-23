@@ -3,3 +3,11 @@ GET http://localhost:3000/coffees
 
 ### get coffee by id
 GET http://localhost:3000/coffees/123
+
+### post coffee
+POST http://localhost:3000/coffees
+Content-Type: application/json
+
+{
+  "name": "latte"
+}
