@@ -1,0 +1,29 @@
+### get all coffee
+GET http://localhost:3000/coffees
+
+### get all coffee with limit and offset
+GET http://localhost:3000/coffees?limit=20&offset=10
+
+### get coffee by id
+GET http://localhost:3000/coffees/1
+
+### post coffee
+POST http://localhost:3000/coffees
+Content-Type: application/json
+
+{
+  "name": "latte",
+  "brand": "latte brand",
+  "flavors": ["coffee", "milk"]
+}
+
+### patch coffee by id
+PATCH http://localhost:3000/coffees/1
+Content-Type: application/json
+
+{
+  "name": "latte-two"
+}
+
+### delete coffee by id
+DELETE http://localhost:3000/coffees/1
