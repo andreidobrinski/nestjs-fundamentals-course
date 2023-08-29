@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
@@ -9,7 +9,15 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 
-@Injectable()
+@Injectable({
+  scope: Scope.DEFAULT, // singleton scope is recommended
+  //
+  // transient providers are not shared across consumers. Each consumer receives a new instance of the provider
+  // scope: Scope.TRANSIENT
+  //
+  // request scope provides a new instance of the provider for each incoming request. Instance is automatically garbage collected
+  // scope: Scope.REQUEST
+})
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
