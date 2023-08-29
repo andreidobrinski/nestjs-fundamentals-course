@@ -7,6 +7,8 @@ import { Flavor } from './entities/flavor.entity';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 
+class MockCoffeesService {}
+
 class ConfigService {}
 class DevelopmentConfigService {}
 class ProductionConfigService {}
@@ -30,6 +32,12 @@ export class CoffeeBrandsFactory {
           ? DevelopmentConfigService
           : ProductionConfigService,
     },
+    // value based provider
+    // {
+    //   provide: CoffeesService,
+    //   useValue: new MockCoffeesService()
+    // },
+    //
     // static value provider
     // { provide: COFFEE_BRANDS, useValue: ['buddy brew', 'nescafe'] },
     //
