@@ -8,6 +8,7 @@ import { Flavor } from './entities/flavor.entity';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
+import { REQUEST } from '@nestjs/core';
 
 @Injectable({
   scope: Scope.DEFAULT, // singleton scope is recommended
@@ -26,6 +27,8 @@ export class CoffeesService {
     private readonly flavorRepository: Repository<Flavor>,
     private readonly dataSource: DataSource,
     @Inject(COFFEE_BRANDS) coffeeBrands: Array<string>,
+    // gives access to request object. Can impact performance negatively
+    @Inject(REQUEST) private request: Request,
   ) {
     console.log('coffeeBrands', coffeeBrands);
   }
