@@ -6,6 +6,7 @@ import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
+import { Connection } from 'typeorm';
 
 class MockCoffeesService {}
 
@@ -45,11 +46,25 @@ export class CoffeeBrandsFactory {
     // { provide: COFFEE_BRANDS, useFactory: () => ['buddy brew', 'nescafe'] },
     //
     // factory provider - advanced
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useFactory: (brandsFactory: CoffeeBrandsFactory) =>
+    //     brandsFactory.create(),
+    //   inject: [CoffeeBrandsFactory],
+    // },
+    //
+    // async provider
     {
-      provide: COFFEE_BRANDS,
-      useFactory: (brandsFactory: CoffeeBrandsFactory) =>
-        brandsFactory.create(),
-      inject: [CoffeeBrandsFactory],
+      provide: 'COFFEE_BRANDS',
+      // Note "async" here, and Promise/Async event inside the Factory function
+      // Could be a database connection / API call / etc
+      // In our case we're just "mocking" this type of event with a Promise
+      useFactory: async (connection: Connection): Promise<string[]> => {
+        // const coffeeBrands = await connection.query('SELECT * ...');
+        const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
+        return coffeeBrands;
+      },
+      inject: [Connection],
     },
   ],
   exports: [CoffeesService],
