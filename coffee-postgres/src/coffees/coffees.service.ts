@@ -9,6 +9,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 import { REQUEST } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable({
   scope: Scope.DEFAULT, // singleton scope is recommended
@@ -29,8 +30,14 @@ export class CoffeesService {
     @Inject(COFFEE_BRANDS) coffeeBrands: Array<string>,
     // gives access to request object. Can impact performance negatively
     @Inject(REQUEST) private request: Request,
+    private readonly configService: ConfigService,
   ) {
     console.log('coffeeBrands', coffeeBrands);
+    const databaseHost = this.configService.get<string>(
+      'DATABASE_HOST',
+      'localhost',
+    );
+    console.log('databaseHost', databaseHost);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
