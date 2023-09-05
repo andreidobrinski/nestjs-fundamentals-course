@@ -9,7 +9,8 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 import { REQUEST } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 
 @Injectable({
   scope: Scope.DEFAULT, // singleton scope is recommended
@@ -31,6 +32,8 @@ export class CoffeesService {
     // gives access to request object. Can impact performance negatively
     @Inject(REQUEST) private request: Request,
     private readonly configService: ConfigService,
+    @Inject(coffeesConfig.KEY)
+    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
     console.log('coffeeBrands', coffeeBrands);
     const databaseHost = this.configService.get(
@@ -39,6 +42,8 @@ export class CoffeesService {
       'database.host',
       'localhost',
     );
+    const coffeesConfig = this.configService.get('coffees'); // can also get coffees.foo directly. Using @Inject coffeesConfig is preferable
+    console.log('coffeesConfig', coffeesConfig);
     console.log('databaseHost', databaseHost);
   }
 
