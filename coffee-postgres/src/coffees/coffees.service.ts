@@ -33,8 +33,10 @@ export class CoffeesService {
     private readonly configService: ConfigService,
   ) {
     console.log('coffeeBrands', coffeeBrands);
-    const databaseHost = this.configService.get<string>(
-      'DATABASE_HOST',
+    const databaseHost = this.configService.get(
+      // 'DATABASE_HOST',
+      // replace hardcoded string DATABASE_HOST with config object
+      'database.host',
       'localhost',
     );
     console.log('databaseHost', databaseHost);
