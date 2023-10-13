@@ -17,6 +17,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiResponse } from '@nestjs/swagger';
 
 // uses validation for entire coffees controller
 // use classes instead of instances for pipes
@@ -26,6 +27,8 @@ export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   // @UsePipes(ValidationPipe)
+  // @ApiResponse({ status: 403, description: 'Forbidden' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @Public()
   @Get()
   async findAll(
