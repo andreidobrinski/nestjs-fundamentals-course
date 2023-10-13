@@ -32,9 +32,9 @@ export class CoffeesService {
     // gives access to request object. Can impact performance negatively
     @Inject(REQUEST) private request: Request,
     private readonly configService: ConfigService,
-    @Inject(coffeesConfig.KEY)
-    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
-  ) {
+  ) // @Inject(coffeesConfig.KEY)
+  // private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
+  {
     console.log('coffeeBrands', coffeeBrands);
     const databaseHost = this.configService.get(
       // 'DATABASE_HOST',
